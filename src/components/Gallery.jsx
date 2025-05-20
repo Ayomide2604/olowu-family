@@ -64,13 +64,38 @@ const Gallery = () => {
 
 	return (
 		<>
-			<div className="row mb-3 container">
-				<div className="col-12 d-flex justify-content-between">
+			<div className="row mb-3 ">
+				<div className="col-12 d-flex justify-content-between align-items-center">
 					<h5 className=""> All Photos</h5>
 					<div>
-						<button className="btn btn-black" onClick={handleDropdownToggle}>
+						<button
+							className="btn btn-black d-flex align-items-center"
+							onClick={handleDropdownToggle}
+							onTouchStart={(e) => {
+								const touch = e.touches[0];
+								const startX = touch.clientX;
+								
+								const handleTouchEnd = (e) => {
+									const touch = e.changedTouches[0];
+									const endX = touch.clientX;
+									const diff = startX - endX;
+									
+									if (Math.abs(diff) > 50) { // Minimum swipe distance
+										if (diff > 0) {
+											handleNext();
+										} else {
+											handlePrev();
+										}
+									}
+									
+									document.removeEventListener('touchend', handleTouchEnd);
+								};
+								
+								document.addEventListener('touchend', handleTouchEnd);
+							}}
+						>
 							{activeFilter ? titleCase(activeFilter) : " All Photos"}{" "}
-							<FaCaretDown />
+							<FaCaretDown size={20} className="ms-2" />
 						</button>
 
 						<div className={`filters ${dropdownOpen ? "" : "d-none"}`}>

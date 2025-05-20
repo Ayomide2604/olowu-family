@@ -66,10 +66,10 @@ const Gallery = () => {
 		<>
 			<div className="row mb-3 ">
 				<div className="col-12 d-flex justify-content-between align-items-center">
-					<h5 className=""> All Photos</h5>
+					<h5 className=" ms-2"> All Photos</h5>
 					<div>
 						<button
-							className="btn btn-black d-flex align-items-center"
+							className="btn btn-outline-dark d-flex align-items-center mx-3"
 							onClick={handleDropdownToggle}
 							onTouchStart={(e) => {
 								const touch = e.touches[0];

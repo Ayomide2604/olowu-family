@@ -5,6 +5,7 @@ import image from "../assets/img/corporate/1.jpg";
 const Hero = () => {
 	return (
 		<section
+			id="section-home"
 			className="hero-section"
 			style={{
 				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${image})`,

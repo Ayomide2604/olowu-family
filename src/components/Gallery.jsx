@@ -74,31 +74,37 @@ const Gallery = () => {
 							onTouchStart={(e) => {
 								const touch = e.touches[0];
 								const startX = touch.clientX;
-								
+
 								const handleTouchEnd = (e) => {
 									const touch = e.changedTouches[0];
 									const endX = touch.clientX;
 									const diff = startX - endX;
-									
-									if (Math.abs(diff) > 50) { // Minimum swipe distance
+
+									if (Math.abs(diff) > 50) {
 										if (diff > 0) {
 											handleNext();
 										} else {
 											handlePrev();
 										}
 									}
-									
-									document.removeEventListener('touchend', handleTouchEnd);
+
+									document.removeEventListener("touchend", handleTouchEnd);
 								};
-								
-								document.addEventListener('touchend', handleTouchEnd);
+
+								document.addEventListener("touchend", handleTouchEnd);
 							}}
 						>
 							{activeFilter ? titleCase(activeFilter) : " All Photos"}{" "}
 							<FaCaretDown size={20} className="ms-2" />
 						</button>
 
-						<div className={`filters ${dropdownOpen ? "" : "d-none"}`}>
+						<div
+							className={`filters ${dropdownOpen ? "" : "d-none"}`}
+							style={{
+								position: "absolute",
+								zIndex: "1",
+							}}
+						>
 							<ul className="list-unstyled bg-white rounded-2 p-2 my-2 position-relative">
 								<li
 									className="px-3 py-1 rounded-2"
@@ -159,6 +165,28 @@ const Gallery = () => {
 						display: "flex",
 						justifyContent: "center",
 						alignItems: "center",
+					}}
+					onTouchStart={(e) => {
+						const touch = e.touches[0];
+						const startX = touch.clientX;
+
+						const handleTouchEnd = (e) => {
+							const touch = e.changedTouches[0];
+							const endX = touch.clientX;
+							const diff = startX - endX;
+
+							if (Math.abs(diff) > 50) {
+								if (diff > 0) {
+									handleNext();
+								} else {
+									handlePrev();
+								}
+							}
+
+							document.removeEventListener("touchend", handleTouchEnd);
+						};
+
+						document.addEventListener("touchend", handleTouchEnd);
 					}}
 				>
 					<button

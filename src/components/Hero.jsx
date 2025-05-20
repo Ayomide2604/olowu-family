@@ -1,11 +1,15 @@
-import heroImage from "../assets/img/hero/hero.jpg";
+import { useState } from "react";
+
+import image from "../assets/img/corporate/1.jpg";
 
 const Hero = () => {
 	return (
 		<section
 			className="hero-section"
 			style={{
-				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroImage})`,
+				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${image})`,
+				backgroundSize: "cover",
+				backgroundRepeat: "no-repeat",
 			}}
 		>
 			<div className="hero-content">

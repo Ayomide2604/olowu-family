@@ -37,7 +37,7 @@ const Gallery = () => {
 						</button>
 
 						<div className={`filters ${dropdownOpen ? "" : "d-none"}`}>
-							<ul className=" list-unstyled bg-white rounded-2 p-2 my-2 position-relative">
+							<ul className="list-unstyled bg-white rounded-2 p-2 my-2 position-relative">
 								<li
 									className="px-3 py-1 rounded-2"
 									onClick={() => handleActiveFilter(null)}
@@ -50,7 +50,7 @@ const Gallery = () => {
 								</li>
 								{categories.map((category) => (
 									<li
-										className="px-3 py-1 mb-1 rounded-3 "
+										className="px-3 py-1 mb-1 rounded-3"
 										key={category.id}
 										onClick={() => handleActiveFilter(category.title)}
 										style={{

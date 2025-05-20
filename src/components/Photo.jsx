@@ -1,11 +1,12 @@
 import { FaEye } from "react-icons/fa";
-const Photo = ({ image }) => {
+
+const Photo = ({ image, onClick }) => {
 	return (
 		<div className="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-			<a
-				href="images/img_4.jpg"
-				className="d-block photo-item"
-				data-fancybox="gallery"
+			<div
+				className="photo-item"
+				onClick={onClick}
+				style={{ cursor: "pointer" }}
 			>
 				<img
 					src={image}
@@ -18,7 +19,7 @@ const Photo = ({ image }) => {
 						<FaEye />
 					</span>
 				</div>
-			</a>
+			</div>
 		</div>
 	);
 };

@@ -1,7 +1,18 @@
-import { useState } from "react";
-import { FaCaretDown } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import {
+	FaCaretDown,
+	FaTimes,
+	FaChevronLeft,
+	FaChevronRight,
+} from "react-icons/fa";
+import { titleCase } from "title-case";
 import Photo from "./Photo";
 import photos from "../data/photos";
+
+// Add global polyfill
+if (typeof global === "undefined") {
+	window.global = window;
+}
 
 const categories = [
 	{ id: 1, title: "corporate" },
@@ -12,6 +23,9 @@ const categories = [
 const Gallery = () => {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const [activeFilter, setActiveFilter] = useState(null);
+	const [photoIndex, setPhotoIndex] = useState(0);
+	const [isOpen, setIsOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const handleDropdownToggle = () => {
 		setDropdownOpen(!dropdownOpen);
@@ -26,6 +40,28 @@ const Gallery = () => {
 		? photos.filter((photo) => photo.category === activeFilter)
 		: photos;
 
+	const handlePhotoClick = (index) => {
+		setPhotoIndex(index);
+		setIsOpen(true);
+		setIsLoading(true);
+	};
+
+	const handlePrev = () => {
+		setIsLoading(true);
+		setPhotoIndex(
+			(photoIndex + filteredPhotos.length - 1) % filteredPhotos.length
+		);
+	};
+
+	const handleNext = () => {
+		setIsLoading(true);
+		setPhotoIndex((photoIndex + 1) % filteredPhotos.length);
+	};
+
+	const handleImageLoad = () => {
+		setIsLoading(false);
+	};
+
 	return (
 		<>
 			<div className="row mb-3 container">
@@ -33,7 +69,8 @@ const Gallery = () => {
 					<h5 className=""> All Photos</h5>
 					<div>
 						<button className="btn btn-black" onClick={handleDropdownToggle}>
-							{activeFilter ? activeFilter : " All Photos"} <FaCaretDown />
+							{activeFilter ? titleCase(activeFilter) : " All Photos"}{" "}
+							<FaCaretDown />
 						</button>
 
 						<div className={`filters ${dropdownOpen ? "" : "d-none"}`}>
@@ -59,7 +96,7 @@ const Gallery = () => {
 												activeFilter === category.title && "#F5EEDC",
 										}}
 									>
-										{category.title}
+										{titleCase(category.title)}
 									</li>
 								))}
 							</ul>
@@ -71,12 +108,106 @@ const Gallery = () => {
 			<section className="row align-items-stretch photos" id="section-photos">
 				<div className="col-12">
 					<div className="row align-items-stretch">
-						{filteredPhotos.map((photo) => (
-							<Photo key={photo.id} image={photo.image} />
+						{filteredPhotos.map((photo, index) => (
+							<Photo
+								key={photo.id}
+								image={photo.image}
+								onClick={() => handlePhotoClick(index)}
+							/>
 						))}
 					</div>
 				</div>
+				{filteredPhotos.length < 1 && <h2>No Images in this Category yet</h2>}
 			</section>
+
+			{isOpen && (
+				<div
+					className="lightbox-overlay"
+					style={{
+						position: "fixed",
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
+						backgroundColor: "rgba(0, 0, 0, 0.9)",
+						zIndex: 1000,
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+					}}
+				>
+					<button
+						onClick={() => setIsOpen(false)}
+						style={{
+							position: "absolute",
+							top: "20px",
+							right: "20px",
+							background: "none",
+							border: "none",
+							color: "white",
+							fontSize: "24px",
+							cursor: "pointer",
+						}}
+					>
+						<FaTimes />
+					</button>
+					<button
+						onClick={handlePrev}
+						style={{
+							position: "absolute",
+							left: "20px",
+							background: "none",
+							border: "none",
+							color: "white",
+							fontSize: "24px",
+							cursor: "pointer",
+						}}
+					>
+						<FaChevronLeft />
+					</button>
+					<div style={{ position: "relative" }}>
+						{isLoading && (
+							<div
+								style={{
+									position: "absolute",
+									top: "50%",
+									left: "50%",
+									transform: "translate(-50%, -50%)",
+									color: "white",
+								}}
+							>
+								Loading...
+							</div>
+						)}
+						<img
+							src={filteredPhotos[photoIndex].image}
+							alt=""
+							style={{
+								maxHeight: "90vh",
+								maxWidth: "90vw",
+								objectFit: "contain",
+								opacity: isLoading ? 0 : 1,
+								transition: "opacity 0.3s",
+							}}
+							onLoad={handleImageLoad}
+						/>
+					</div>
+					<button
+						onClick={handleNext}
+						style={{
+							position: "absolute",
+							right: "20px",
+							background: "none",
+							border: "none",
+							color: "white",
+							fontSize: "24px",
+							cursor: "pointer",
+						}}
+					>
+						<FaChevronRight />
+					</button>
+				</div>
+			)}
 		</>
 	);
 };

@@ -67,8 +67,8 @@ const Sidebar = () => {
 				className="header-bar d-flex d-lg-block align-items-center"
 				data-aos="fade-right"
 			>
-				<div className="site-logo">
-					<a href="index.html">Logo</a>
+				<div className="site-logo ">
+					<a href="index.html">Ayo&Tife</a>
 				</div>
 
 				<div

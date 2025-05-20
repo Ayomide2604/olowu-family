@@ -1,12 +1,11 @@
-import hero1 from "../assets/img/hero/hero4.jpg";
-import hero2 from "../assets/img/hero/hero2.png";
-import hero3 from "../assets/img/hero/hero3.png";
+import heroImage from "../assets/img/hero/hero.jpg";
+
 const Hero = () => {
 	return (
 		<section
 			className="hero-section"
 			style={{
-				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${hero1})`,
+				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroImage})`,
 			}}
 		>
 			<div className="hero-content">

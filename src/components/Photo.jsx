@@ -7,7 +7,12 @@ const Photo = ({ image }) => {
 				className="d-block photo-item"
 				data-fancybox="gallery"
 			>
-				<img src={image} alt="Image" className="img-fluid mb-0" />
+				<img
+					src={image}
+					alt="Image"
+					className="img-fluid mb-0"
+					style={{ objectFit: "cover" }}
+				/>
 				<div className="photo-text-more">
 					<span className="icon icon-eye">
 						<FaEye />

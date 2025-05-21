@@ -21,14 +21,23 @@ const Sidebar = () => {
 					isMenuOpen ? "offcanvas-menu" : ""
 				}`}
 			>
-				<div className="site-mobile-menu-header ">
-					<div className="site-mobile-menu-close mt-3">
-						<span className="icon-close2 js-menu-toggle" onClick={toggleMenu}>
-							<FaTimes color="black" />
+				<div className="site-mobile-menu-header  ">
+					<div className=" mt-3 d-flex justify-content-between mb-3">
+						<div className="site-mobile-menu-header">
+							<h2 href="index.html">Ayo&Tife</h2>
+						</div>
+						<span
+							className="icon-close2 js-menu-toggle mx-3"
+							onClick={toggleMenu}
+						>
+							<FaTimes color="black" size={25} />
 						</span>
 					</div>
 				</div>
-				<div className="site-mobile-menu-body">
+				<div
+					className="site-mobile-menu-body header-bar"
+					style={{ minHeight: "100vh" }}
+				>
 					<ul className="site-nav-wrap" onClick={toggleMenu}>
 						<li>
 							<a href="#section-home" className="nav-link">
@@ -95,21 +104,6 @@ const Sidebar = () => {
 						<li>
 							<a href="#section-about" className="nav-link">
 								About
-							</a>
-						</li>
-						<li>
-							<a href="#section-testimonial" className="nav-link">
-								Testimonial
-							</a>
-						</li>
-						<li>
-							<a href="#section-blog" className="nav-link">
-								Blog
-							</a>
-						</li>
-						<li>
-							<a href="#section-contact" className="nav-link">
-								Contact
 							</a>
 						</li>
 					</ul>

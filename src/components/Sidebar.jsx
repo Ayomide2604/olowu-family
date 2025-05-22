@@ -44,6 +44,13 @@ const Sidebar = () => {
 								Home
 							</a>
 						</li>
+
+						<li>
+							<a href="#section-love-story" className="nav-link">
+								Our Story
+							</a>
+						</li>
+
 						<li>
 							<a href="#section-photos" className="nav-link">
 								Photos
@@ -97,13 +104,13 @@ const Sidebar = () => {
 							</a>
 						</li>
 						<li>
-							<a href="#section-photos" className="nav-link">
-								Photos
+							<a href="#section-love-story" className="nav-link">
+								Our Story
 							</a>
 						</li>
 						<li>
-							<a href="#section-about" className="nav-link">
-								About
+							<a href="#section-photos" className="nav-link">
+								Photos
 							</a>
 						</li>
 					</ul>

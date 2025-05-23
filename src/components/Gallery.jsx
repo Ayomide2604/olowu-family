@@ -7,6 +7,7 @@ import {
 } from "react-icons/fa";
 import { titleCase } from "title-case";
 import Photo from "./Photo";
+import Pagination from "./Pagination";
 import photos from "../data/photos";
 
 // Add global polyfill
@@ -24,12 +25,15 @@ const categories = [
 	{ id: 6, title: "random" },
 ];
 
+const ITEMS_PER_PAGE = 12;
+
 const Gallery = () => {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const [activeFilter, setActiveFilter] = useState(null);
 	const [photoIndex, setPhotoIndex] = useState(0);
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const handleDropdownToggle = () => {
 		setDropdownOpen(!dropdownOpen);
@@ -38,14 +42,25 @@ const Gallery = () => {
 	const handleActiveFilter = (category) => {
 		setActiveFilter(category);
 		setDropdownOpen(false);
+		setCurrentPage(1); // Reset to first page when filter changes
 	};
 
 	const filteredPhotos = activeFilter
 		? photos.filter((photo) => photo.category === activeFilter)
 		: photos;
 
+	// Calculate pagination
+	const totalPages = Math.ceil(filteredPhotos.length / ITEMS_PER_PAGE);
+	const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+	const endIndex = startIndex + ITEMS_PER_PAGE;
+	const currentPhotos = filteredPhotos.slice(startIndex, endIndex);
+
+	const handlePageChange = (pageNumber) => {
+		setCurrentPage(pageNumber);
+	};
+
 	const handlePhotoClick = (index) => {
-		setPhotoIndex(index);
+		setPhotoIndex(index + startIndex); // Adjust index to account for pagination
 		setIsOpen(true);
 		setIsLoading(true);
 	};
@@ -140,10 +155,10 @@ const Gallery = () => {
 				</div>
 			</div>
 
-			<section className="row align-items-stretch photos" id="section-photos">
+			<section className="row align-items-stretch photos " id="section-photos">
 				<div className="col-12">
 					<div className="row align-items-stretch">
-						{filteredPhotos.map((photo, index) => (
+						{currentPhotos.map((photo, index) => (
 							<Photo
 								key={photo.id}
 								image={photo.image}
@@ -154,6 +169,14 @@ const Gallery = () => {
 				</div>
 				{filteredPhotos.length < 1 && <h2>No Images in this Category yet</h2>}
 			</section>
+
+			{filteredPhotos.length > 0 && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					onPageChange={handlePageChange}
+				/>
+			)}
 
 			{isOpen && (
 				<div

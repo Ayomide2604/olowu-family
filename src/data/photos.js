@@ -26,7 +26,6 @@ import graduation3 from "../assets/img/graduation/graduation3.jpg";
 
 import throwback1 from "../assets/img/throwbacks/throwback1.jpg";
 import throwback2 from "../assets/img/throwbacks/throwback2.jpg";
-import throwback3 from "../assets/img/throwbacks/throwback3.jpg";
 import throwback4 from "../assets/img/throwbacks/throwback4.jpg";
 import throwback5 from "../assets/img/throwbacks/throwback5.jpg";
 
@@ -52,7 +51,6 @@ const photos = [
 	{ id: 12, category: "graduation", image: graduation3 },
 	{ id: 13, category: "throwback", image: throwback1 },
 	{ id: 14, category: "throwback", image: throwback2 },
-	{ id: 15, category: "throwback", image: throwback3 },
 	{ id: 16, category: "throwback", image: throwback4 },
 	{ id: 17, category: "throwback", image: throwback5 },
 	{ id: 18, category: "random", image: random1 },

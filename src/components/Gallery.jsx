@@ -34,6 +34,18 @@ const Gallery = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+		};
+
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
 
 	const handleDropdownToggle = () => {
 		setDropdownOpen(!dropdownOpen);
@@ -90,28 +102,6 @@ const Gallery = () => {
 						<button
 							className="btn btn-outline-dark d-flex align-items-center mx-3"
 							onClick={handleDropdownToggle}
-							onTouchStart={(e) => {
-								const touch = e.touches[0];
-								const startX = touch.clientX;
-
-								const handleTouchEnd = (e) => {
-									const touch = e.changedTouches[0];
-									const endX = touch.clientX;
-									const diff = startX - endX;
-
-									if (Math.abs(diff) > 50) {
-										if (diff > 0) {
-											handleNext();
-										} else {
-											handlePrev();
-										}
-									}
-
-									document.removeEventListener("touchend", handleTouchEnd);
-								};
-
-								document.addEventListener("touchend", handleTouchEnd);
-							}}
 						>
 							{activeFilter ? titleCase(activeFilter) : " All Photos"}{" "}
 							<FaCaretDown size={20} className="ms-2" />
@@ -194,6 +184,7 @@ const Gallery = () => {
 						alignItems: "center",
 					}}
 					onTouchStart={(e) => {
+						if (!isMobile) return;
 						const touch = e.touches[0];
 						const startX = touch.clientX;
 
@@ -231,20 +222,22 @@ const Gallery = () => {
 					>
 						<FaTimes />
 					</button>
-					<button
-						onClick={handlePrev}
-						style={{
-							position: "absolute",
-							left: "20px",
-							background: "none",
-							border: "none",
-							color: "white",
-							fontSize: "24px",
-							cursor: "pointer",
-						}}
-					>
-						<FaChevronLeft />
-					</button>
+					{!isMobile && (
+						<button
+							onClick={handlePrev}
+							style={{
+								position: "absolute",
+								left: "20px",
+								background: "none",
+								border: "none",
+								color: "white",
+								fontSize: "24px",
+								cursor: "pointer",
+							}}
+						>
+							<FaChevronLeft />
+						</button>
+					)}
 					<div style={{ position: "relative" }}>
 						{isLoading && (
 							<div
@@ -272,20 +265,22 @@ const Gallery = () => {
 							onLoad={handleImageLoad}
 						/>
 					</div>
-					<button
-						onClick={handleNext}
-						style={{
-							position: "absolute",
-							right: "20px",
-							background: "none",
-							border: "none",
-							color: "white",
-							fontSize: "24px",
-							cursor: "pointer",
-						}}
-					>
-						<FaChevronRight />
-					</button>
+					{!isMobile && (
+						<button
+							onClick={handleNext}
+							style={{
+								position: "absolute",
+								right: "20px",
+								background: "none",
+								border: "none",
+								color: "white",
+								fontSize: "24px",
+								cursor: "pointer",
+							}}
+						>
+							<FaChevronRight />
+						</button>
+					)}
 				</div>
 			)}
 		</>

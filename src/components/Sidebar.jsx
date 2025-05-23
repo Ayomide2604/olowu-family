@@ -22,7 +22,7 @@ const Sidebar = () => {
 				}`}
 			>
 				<div className="site-mobile-menu-header  ">
-					<div className=" mt-3 d-flex justify-content-between mb-3">
+					<div className=" my-1 py-1 d-flex justify-content-between ">
 						<div className="site-mobile-menu-header">
 							<h2 href="index.html">Ayo&Tife</h2>
 						</div>

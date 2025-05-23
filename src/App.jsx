@@ -3,6 +3,7 @@ import Gallery from "./components/Gallery";
 import Hero from "./components/Hero";
 import Sidebar from "./components/Sidebar";
 import LoveStory from "./components/LoveStory";
+import Footer from "./components/Footer";
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 					<LoveStory />
 					<Gallery />
 				</div>
+				<Footer />
 			</main>
 		</div>
 	);

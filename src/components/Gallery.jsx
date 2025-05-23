@@ -27,6 +27,42 @@ const categories = [
 
 const ITEMS_PER_PAGE = 12;
 
+const LoadingSpinner = () => (
+	<div
+		style={{
+			position: "absolute",
+			top: "50%",
+			left: "50%",
+			transform: "translate(-50%, -50%)",
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			gap: "1rem",
+		}}
+	>
+		<div
+			style={{
+				width: "50px",
+				height: "50px",
+				border: "4px solid rgba(255, 255, 255, 0.3)",
+				borderRadius: "50%",
+				borderTopColor: "#fff",
+				animation: "spin 1s linear infinite",
+			}}
+		/>
+		<style>
+			{`
+				@keyframes spin {
+					to {
+						transform: rotate(360deg);
+					}
+				}
+			`}
+		</style>
+		<span style={{ color: "white", fontSize: "1rem" }}>Loading...</span>
+	</div>
+);
+
 const Gallery = () => {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const [activeFilter, setActiveFilter] = useState(null);
@@ -184,7 +220,6 @@ const Gallery = () => {
 						alignItems: "center",
 					}}
 					onTouchStart={(e) => {
-						if (!isMobile) return;
 						const touch = e.touches[0];
 						const startX = touch.clientX;
 
@@ -218,40 +253,32 @@ const Gallery = () => {
 							color: "white",
 							fontSize: "24px",
 							cursor: "pointer",
+							zIndex: 1001,
 						}}
 					>
 						<FaTimes />
 					</button>
-					{!isMobile && (
-						<button
-							onClick={handlePrev}
-							style={{
-								position: "absolute",
-								left: "20px",
-								background: "none",
-								border: "none",
-								color: "white",
-								fontSize: "24px",
-								cursor: "pointer",
-							}}
-						>
-							<FaChevronLeft />
-						</button>
-					)}
+					<button
+						onClick={handlePrev}
+						style={{
+							position: "absolute",
+							left: "20px",
+							background: "none",
+							border: "none",
+							color: "white",
+							fontSize: "24px",
+							cursor: "pointer",
+							zIndex: 1001,
+							padding: "15px",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
+						<FaChevronLeft />
+					</button>
 					<div style={{ position: "relative" }}>
-						{isLoading && (
-							<div
-								style={{
-									position: "absolute",
-									top: "50%",
-									left: "50%",
-									transform: "translate(-50%, -50%)",
-									color: "white",
-								}}
-							>
-								Loading...
-							</div>
-						)}
+						{isLoading && <LoadingSpinner />}
 						<img
 							src={filteredPhotos[photoIndex].image}
 							alt=""
@@ -265,22 +292,25 @@ const Gallery = () => {
 							onLoad={handleImageLoad}
 						/>
 					</div>
-					{!isMobile && (
-						<button
-							onClick={handleNext}
-							style={{
-								position: "absolute",
-								right: "20px",
-								background: "none",
-								border: "none",
-								color: "white",
-								fontSize: "24px",
-								cursor: "pointer",
-							}}
-						>
-							<FaChevronRight />
-						</button>
-					)}
+					<button
+						onClick={handleNext}
+						style={{
+							position: "absolute",
+							right: "20px",
+							background: "none",
+							border: "none",
+							color: "white",
+							fontSize: "24px",
+							cursor: "pointer",
+							zIndex: 1001,
+							padding: "15px",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
+						<FaChevronRight />
+					</button>
 				</div>
 			)}
 		</>

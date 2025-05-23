@@ -1,5 +1,5 @@
 .love-story {
-	padding: 4rem 2rem;
+	padding: 6rem 2rem;
 	background-color: transparent;
 	min-height: 100vh;
 	display: flex;
@@ -8,7 +8,7 @@
 }
 
 .love-story-container {
-	max-width: 1000px;
+	max-width: 1200px;
 	margin: 0 auto;
 	width: 100%;
 	position: relative;
@@ -17,34 +17,47 @@
 
 .love-story h2 {
 	text-align: center;
-	font-size: 3.5rem;
+	font-size: 4rem;
 	color: #000;
 	margin-bottom: 4rem;
 	font-family: "Playfair Display", serif;
 	font-weight: 600;
 	letter-spacing: 1px;
+	position: relative;
 }
 
-.story-swiper {
-	width: 100%;
-	position: relative;
+.love-story h2:after {
+	content: "";
+	position: absolute;
+	bottom: -15px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100px;
+	height: 3px;
+	background: linear-gradient(90deg, #ff6b6b, #ffd93d);
 }
 
 .timeline-section {
-	background: rgba(255, 255, 255, 0.95);
-	padding: 3rem;
-	padding-bottom: 4rem;
-	border-radius: 20px;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-	position: relative;
-}
-
-.slide-content {
 	display: flex;
 	flex-direction: column;
+	gap: 3rem;
 }
 
-.timeline-section::before {
+.story-card {
+	background: rgba(255, 255, 255, 0.95);
+	padding: 3rem;
+	border-radius: 30px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+	position: relative;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.story-card::before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -52,149 +65,79 @@
 	width: 100%;
 	height: 5px;
 	background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+	border-radius: 30px 30px 0 0;
 }
 
-.timeline-section h3 {
-	font-size: 2.2rem;
-	color: #000;
+.story-header {
+	text-align: center;
 	margin-bottom: 2rem;
+}
+
+.story-header h3 {
+	font-size: 2.5rem;
+	color: #000;
 	font-family: "Playfair Display", serif;
 	font-weight: 600;
-	text-align: center;
+	letter-spacing: 0.5px;
 }
 
-.timeline-content {
+.story-body {
 	font-size: 1.2rem;
 	line-height: 2;
 	color: #333;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
-.timeline-content p {
+.story-body p {
 	margin-bottom: 2rem;
 	text-align: justify;
 }
 
-.timeline-content blockquote {
+.story-body blockquote {
 	font-style: italic;
 	border-left: 4px solid #ff6b6b;
-	padding: 1rem 2rem;
+	padding: 1.5rem 2rem;
 	margin: 2rem 0;
 	color: #444;
 	background: rgba(255, 107, 107, 0.05);
-	border-radius: 0 10px 10px 0;
-}
-
-/* Swiper Navigation Buttons */
-.swiper-button-next,
-.swiper-button-prev {
-	color: #000 !important;
-	background: rgba(255, 255, 255, 0.9);
-	width: 50px !important;
-	height: 50px !important;
-	border-radius: 50%;
-	transition: all 0.3s ease;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-	position: absolute !important;
-	top: 50% !important;
-	transform: translateY(-50%) !important;
-	z-index: 100 !important;
-	display: flex !important;
-	align-items: center;
-	justify-content: center;
-}
-
-.swiper-button-next {
-	right: -60px !important;
-}
-
-.swiper-button-prev {
-	left: -60px !important;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-	background: #fff;
-	transform: translateY(-50%) scale(1.1) !important;
-}
-
-.swiper-button-next:after,
-.swiper-button-prev:after {
-	font-size: 1.5rem !important;
-	font-weight: bold;
-}
-
-/* Pagination Styles */
-.swiper-pagination {
-	position: absolute !important;
-	bottom: 1rem !important;
-	left: 0 !important;
-	width: 100% !important;
-	display: flex !important;
-	justify-content: center !important;
-	gap: 8px !important;
-}
-
-.swiper-pagination-bullet {
-	width: 8px !important;
-	height: 8px !important;
-	background: #000 !important;
-	opacity: 0.3;
-	transition: all 0.3s ease;
-}
-
-.swiper-pagination-bullet-active {
-	background: #ff6b6b !important;
-	opacity: 1;
-	transform: scale(1.2);
+	border-radius: 0 15px 15px 0;
+	font-size: 1.3rem;
+	line-height: 1.8;
 }
 
 @media (max-width: 768px) {
 	.love-story {
-		padding: 3rem 0.5rem;
-		min-height: auto;
+		padding: 4rem 0.5rem;
 	}
 
 	.love-story h2 {
 		font-size: 2.8rem;
-		margin-bottom: 2.5rem;
-	}
-
-	.timeline-section {
-		padding: 2.5rem 1.5rem;
-		padding-bottom: 3.5rem;
-		border-radius: 15px;
-		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-	}
-
-	.timeline-section h3 {
-		font-size: 2rem;
-		margin-bottom: 1.8rem;
-	}
-
-	.timeline-content {
-		padding-bottom: 2.5rem;
-	}
-
-	.timeline-content p {
-		margin-bottom: 1.5rem;
-	}
-
-	.timeline-content blockquote {
-		padding: 1.2rem;
-		margin: 1.8rem 0;
-		font-size: 1.1rem;
-	}
-
-	.swiper-button-next,
-	.swiper-button-prev {
-		display: none !important;
+		margin-bottom: 3rem;
 	}
 
 	.love-story-container {
-		padding: 0 15px;
+		padding: 0 10px;
 	}
 
-	.swiper-pagination {
-		bottom: 0.75rem !important;
+	.story-card {
+		padding: 2rem 1.2rem;
+		border-radius: 20px;
+		margin: 0 -10px;
+		width: calc(100% + 20px);
+	}
+
+	.story-header h3 {
+		font-size: 2rem;
+	}
+
+	.story-body {
+		font-size: 1.1rem;
+	}
+
+	.story-body blockquote {
+		padding: 1.2rem;
+		margin: 1.5rem 0;
+		font-size: 1.2rem;
 	}
 }

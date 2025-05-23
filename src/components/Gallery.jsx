@@ -10,6 +10,7 @@ import Photo from "./Photo";
 import photos from "../data/photos";
 
 // Add global polyfill
+
 if (typeof global === "undefined") {
 	window.global = window;
 }
@@ -18,6 +19,9 @@ const categories = [
 	{ id: 1, title: "corporate" },
 	{ id: 2, title: "traditional" },
 	{ id: 3, title: "beach" },
+	{ id: 4, title: "graduation" },
+	{ id: 5, title: "throwback" },
+	{ id: 6, title: "random" },
 ];
 
 const Gallery = () => {
